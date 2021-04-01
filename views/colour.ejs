@@ -1,0 +1,11 @@
+<%- include('partials/header') %>
+
+<h1>Colour Profile</h1>
+
+<p>Colour ID: <%= colour.id %></p>
+<p>Colour Name: <%= colour.name %></p>
+
+<div
+  style="background-color: <%= colour.name %>; width: 200px; height: 200px"
+></div>
+<%- include('partials/footer') %>

@@ -35,7 +35,42 @@ connection.connect((err) => {
 });
 
 router.get("/", function (req, res) {
-  res.send("Hello World!");
+  const query = "SELECT * FROM colours ORDER BY id ASC";
+
+  connection.query(query, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.render("index", { colours: result });
+  });
+});
+
+router.get("/colour/:id", function (req, res) {
+  const query = `SELECT * FROM colours WHERE id = ${req.params.id}`;
+
+  connection.query(query, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.render("colour", { colour: result[0] });
+  });
+});
+router.get("/add-colour", function (req, res) {
+  res.render("add-colour");
+});
+
+router.post("/add-colour-complete", function (req, res) {
+  const query = `INSERT INTO colours (name) VALUES ("${req.body.name}")`;
+
+  connection.query(query, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.writeHead(302, {
+      Location: "/",
+    });
+    res.end();
+  });
 });
 
 app.use("/", router);

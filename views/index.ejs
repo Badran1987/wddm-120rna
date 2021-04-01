@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<ul>
+  <%if (colours.length > 0) { %> <% colours.forEach((colour, i) => { %>
+
+  <li><a href="colour/<%= colour.id %>"><%= colour.name %></a></li>
+
+  <% }) %> <% } else { %>
+  <p>No colours found.</p>
+  <% } %>
+</ul>
+<%- include('partials/footer') %>
+
